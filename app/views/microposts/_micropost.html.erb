@@ -1,17 +1,14 @@
-<div id="<%= dom_id micropost %>">
-  <p>
-    <strong>Content:</strong>
-    <%= micropost.content %>
-  </p>
+<div id="<%= dom_id micropost %>" class="card">
 
-  <p>
-    <strong>User:</strong>
-    <%= micropost.user_id %>
-  </p>
-
-  <p>
-    <strong>Likes:</strong>
-    <%= micropost.likes %>
-  </p>
-
+  <div class="card-body">
+    <p class="card-text"><%= micropost.content %></p>
+    <a href="<%= micropost_url(micropost) %>" class="btn btn-outline-primary btn-sm">SHOW POST</a>
+    <a href="<%= like_micropost_url(micropost) %>" class="btn btn-outline-success btn-sm">
+      LIKE POST
+    </a>
+  </div>
+  <div class="card-footer">
+    <span class="badge text-bg-success"><%= pluralize(micropost.likes,'like') %></span>
+    <small class="text-body-secondary"><%= micropost.details %></small>
+  </div>
 </div>

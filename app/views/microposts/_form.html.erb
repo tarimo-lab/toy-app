@@ -1,4 +1,4 @@
-<%= form_with(model: micropost) do |form| %>
+<%= form_for(micropost) do |form| %>
   <% if micropost.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(micropost.errors.count, "error") %> prohibited this micropost from being saved:</h2>
@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+  <div class="input-group mb-3">
+    <span class="input-group-text">USER ID</span>
+    
+
+    <%= form.select :user_id, options_for_select(@select_options,:selected=>nil),{}, {:class => 'form-control'} %>
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-text">CONTENT</span>
+    <%= form.text_area :content, class:"form-control", placeholder: "CONTENT", :rows => "3" %>
   </div>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <button type="submit" class="btn btn-primary">Create MicroPost</button>
   </div>
 <% end %>

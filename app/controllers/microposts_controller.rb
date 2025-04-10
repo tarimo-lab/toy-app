@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_action :set_micropost, only: %i[ show edit update destroy ]
+  before_action :set_micropost, only: %i[ show edit update destroy like]
 
   # GET /microposts or /microposts.json
   def index
@@ -10,9 +10,15 @@ class MicropostsController < ApplicationController
   def show
   end
 
+  def like
+    @micropost.update(likes:@micropost.likes+1)
+    redirect_to microposts_path, status: :see_other, notice: "Micropost was successfully liked."
+  end
+
   # GET /microposts/new
   def new
     @micropost = Micropost.new
+    @select_options = [["Select User",nil]] + User.all.map{ |user| [user.name,user.id] }
   end
 
   # GET /microposts/1/edit

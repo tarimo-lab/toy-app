@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   get "home/about"
   get "home/contactus"
   get "home/help"
-  resources :microposts
+  
+  resources :microposts do
+    member do
+      get :like
+    end
+  end
 
   resources :users
 
