@@ -1,6 +1,8 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[ show edit update destroy like]
 
+  before_action :set_user_options, only: %i[ new edit create ]
+
   # GET /microposts or /microposts.json
   def index
     @microposts = Micropost.all
@@ -18,7 +20,6 @@ class MicropostsController < ApplicationController
   # GET /microposts/new
   def new
     @micropost = Micropost.new
-    @select_options = [["Select User",nil]] + User.all.map{ |user| [user.name,user.id] }
   end
 
   # GET /microposts/1/edit
@@ -64,6 +65,12 @@ class MicropostsController < ApplicationController
   end
 
   private
+
+    # Creates and sets the names and user_if for micropost form
+    def set_user_options
+      @select_options = [["Select User",nil]] + User.all.map{ |user| [user.name,user.id] }
+    end 
+
     # Use callbacks to share common setup or constraints between actions.
     def set_micropost
       @micropost = Micropost.find(params[:id])
