@@ -29,6 +29,7 @@ class MicropostsController < ApplicationController
   # POST /microposts or /microposts.json
   def create
     @micropost = Micropost.new(micropost_params)
+    @micropost.user_id = current_user.id
 
     respond_to do |format|
       if @micropost.save

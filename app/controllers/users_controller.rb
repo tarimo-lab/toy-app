@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @microposts = Micropost.where(user_id:@user.id)
   end
 
   # GET /users/new
@@ -25,6 +26,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save  # Saving to the database
+
+        # Now log-in the user too
+        reset_session
+        log_in(@user)
+
         format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -65,6 +71,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end

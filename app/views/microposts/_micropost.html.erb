@@ -3,9 +3,9 @@
   <div class="card-body">
     <p class="card-text"><%= micropost.content %></p>
     <a href="<%= micropost_url(micropost) %>" class="btn btn-outline-primary btn-sm">SHOW POST</a>
-    <a href="<%= like_micropost_url(micropost) %>" class="btn btn-outline-success btn-sm">
-      LIKE POST
-    </a>
+    <% if logged_in? %>
+      <a href="<%= like_micropost_url(micropost) %>" class="btn btn-outline-success btn-sm">LIKE POST</a>
+    <% end %>
   </div>
   <div class="card-footer">
     <span class="badge text-bg-success"><%= pluralize(micropost.likes,'like') %></span>
