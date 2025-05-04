@@ -1,14 +1,7 @@
 <%= form_for(micropost) do |form| %>
+  
   <% if micropost.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(micropost.errors.count, "error") %> prohibited this micropost from being saved:</h2>
-
-      <ul>
-        <% micropost.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= render partial: "shared/errors", locals: {object: micropost, name:"micropost"} %>
   <% end %>
 
   <div class="input-group">

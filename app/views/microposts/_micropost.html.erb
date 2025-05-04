@@ -8,7 +8,7 @@
     <% end %>
   </div>
   <div class="card-footer">
-    <span class="badge text-bg-success"><%= pluralize(micropost.likes,'like') %></span>
+    <span class="badge text-bg-success"><%= pluralize(micropost.likes.count,'like') %></span>
     <small class="text-body-secondary"><%= micropost.details %></small>
   </div>
 </div>
